@@ -1,0 +1,18 @@
+[
+    { "name": "NVIDIA GeForce RTX 4090", "price": 1599 },
+    { "name": "AMD Radeon RX 7900 XTX", "price": 999 },
+    { "name": "Intel Core i9-13900K", "price": 599 },
+    { "name": "AMD Ryzen 9 7950X3D", "price": 699 },
+    { "name": "Logitech MX Master 3S Mouse", "price": 99 },
+    { "name": "Corsair K95 RGB Keyboard", "price": 199 },
+    { "name": "NZXT H9 Elite Case", "price": 249 },
+    { "name": "Cooler Master HAF 700 EVO Case", "price": 299 },
+    { "name": "ASUS ROG Swift 360Hz Monitor", "price": 999 },
+    { "name": "Dell UltraSharp 4K Monitor", "price": 699 },
+    { "name": "Intel Core i5-13600K", "price": 319 },
+    { "name": "AMD Ryzen 7 7700X", "price": 399 },
+    { "name": "Razer DeathAdder V3 Pro Mouse", "price": 149 },
+    { "name": "HyperX Alloy Origins Core Keyboard", "price": 109 },
+    { "name": "Fractal Design Meshify 2 Case", "price": 229 },
+    { "name": "Samsung Odyssey G7 Monitor", "price": 749 }
+]

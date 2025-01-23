@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buy and sell GPUs, CPUs, peripherals, and other hardware at Mike's Hardware Marketplace.">
+    <meta name="keywords" content="hardware marketplace, GPUs, CPUs, peripherals, buy hardware, sell hardware">
+    <meta name="author" content="Mike's Hardware Marketplace">
+    <title>Mike's Hardware Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg');
+            background-size: cover;
+            color: #333;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem 2rem;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 1rem;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        .cta-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+        .categories {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .category {
+            background-color: #f0f0f0;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            flex: 1;
+        }
+        .category a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .category a:hover {
+            text-decoration: underline;
+        }
+        .device img {
+            max-width: 150px;
+            max-height: 150px;
+            display: block;
+            margin: 0 auto 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Mike's Hardware Marketplace</h1>
+            <div class="search-bar">
+                <form action="search_results.html" method="get" onsubmit="return validateSearchInput()">
+                    <input type="text" name="query" id="search-query" placeholder="Search..." aria-label="Search for hardware">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gpus.html">GPUs</a></li>
+                <li><a href="cpus.html">CPUs</a></li>
+                <li><a href="peripherals.html">Peripherals</a></li>
+                <li>
+                    <a href="sell.html">Sell Your Hardware</a>
+                    <ul class="dropdown">
+                        <li><a href="sell_gpus.html">GPUs</a></li>
+                        <li><a href="sell_cpus.html">CPUs</a></li>
+                        <li><a href="sell_peripherals.html">Peripherals</a></li>
+                        <li><a href="sell_other.html">Other Hardware</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Welcome to Mike's Hardware Marketplace</h2>
+            <p>Find the best deals on GPUs, CPUs, and peripherals, or list your own hardware for sale.</p>
+            <p>Browse our categories to explore available options.</p>
+            <button onclick="location.href='all_devices.html'" class="cta-button">Start Browsing</button>
+            <button onclick="location.href='sell.html'" class="cta-button">Sell Your Hardware</button>
+        </section>
+        <section>
+            <h3>Popular Categories</h3>
+            <div class="categories">
+                <div class="category">
+                    <h4><a href="gpus.html">GPUs</a></h4>
+                    <p>Explore high-performance graphics cards for gaming and productivity.</p>
+                </div>
+                <div class="category">
+                    <h4><a href="cpus.html">CPUs</a></h4>
+                    <p>Browse a wide range of processors for all your computing needs.</p>
+                </div>
+                <div class="category">
+                    <h4><a href="peripherals.html">Peripherals</a></h4>
+                    <p>Find keyboards, mice, monitors, and more to complete your setup.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Contact us: <span id="contact-email">support@mikeshardwaremarketplace.com</span> | Phone: <span id="contact-phone">214-430-1839</span></p>
+        <p>&copy; 2025 Mike's Hardware Marketplace. All rights reserved.</p>
+    </footer>
+    <script>
+        async function fetchContactInfo() {
+            try {
+                const response = await fetch('contact-config.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const contactInfo = await response.json();
+                document.getElementById('contact-email').textContent = contactInfo.email;
+                document.getElementById('contact-phone').textContent = contactInfo.phone;
+            } catch (error) {
+                console.error('Failed to fetch contact information:', error);
+            }
+        }
+
+        fetchContactInfo();
+
+        function validateSearchInput() {
+            const searchQuery = document.getElementById('search-query').value.trim();
+            if (!searchQuery) {
+                alert('Please enter a search term.');
+                return false;
+            }
+            return true;
+        }
+
+        // Function to dynamically load devices from the backend
+        async function loadDevices() {
+            try {
+                const response = await fetch('devices.json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch devices');
+                }
+                const devices = await response.json();
+
+                const categories = {
+                    GPUs: document.querySelector('[data-category="GPUs"]'),
+                    CPUs: document.querySelector('[data-category="CPUs"]'),
+                    Peripherals: document.querySelector('[data-category="Peripherals"]')
+                };
+
+                devices.forEach(device => {
+                    const deviceDiv = document.createElement('div');
+                    deviceDiv.className = 'device';
+                    deviceDiv.innerHTML = `
+                        <img src="${device.image}" alt="${device.name}">
+                        <h4>${device.name}</h4>
+                        <p>Price: $${device.price}</p>
+                    `;
+                    if (categories[device.category]) {
+                        categories[device.category].appendChild(deviceDiv);
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading devices:', error);
+            }
+        }
+
+        loadDevices();
+    </script>
+</body>
+</html>
